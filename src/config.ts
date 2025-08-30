@@ -193,7 +193,7 @@ export interface ExtensionConfigurationSettings {
     emscriptenSearchDirs: string[];
     mergedCompileCommands: string | null;
     copyCompileCommands: string | null;
-    afterGenerateTask: string | null;
+    postConfigureTask: string | null;
     loadCompileCommands: boolean;
     configureOnOpen: boolean;
     configureOnEdit: boolean;
@@ -536,8 +536,8 @@ export class ConfigurationReader implements vscode.Disposable {
     get copyCompileCommands(): string | null {
         return this.configData.copyCompileCommands;
     }
-    get afterGenerateTask(): string | null {
-        return this.configData.afterGenerateTask;
+    get postConfigureTask(): string | null {
+        return this.configData.postConfigureTask;
     }
     get loadCompileCommands(): boolean {
         return this.configData.loadCompileCommands;
@@ -646,7 +646,7 @@ export class ConfigurationReader implements vscode.Disposable {
         emscriptenSearchDirs: new vscode.EventEmitter<string[]>(),
         mergedCompileCommands: new vscode.EventEmitter<string | null>(),
         copyCompileCommands: new vscode.EventEmitter<string | null>(),
-        afterGenerateTask: new vscode.EventEmitter<string | null>(),
+        postConfigureTask: new vscode.EventEmitter<string | null>(),
         loadCompileCommands: new vscode.EventEmitter<boolean>(),
         configureOnOpen: new vscode.EventEmitter<boolean>(),
         configureOnEdit: new vscode.EventEmitter<boolean>(),

@@ -1616,30 +1616,30 @@ export class CMakeProject {
     }
 
     /**
-     * Execute the afterGenerateTask if configured
+     * Execute the postConfigureTask if configured
      */
-    private async executeAfterGenerateTask(): Promise<void> {
-        const afterGenerateTask = this.workspaceContext.config.afterGenerateTask;
-        if (afterGenerateTask) {
+    private async executePostConfigureTask(): Promise<void> {
+        const postConfigureTask = this.workspaceContext.config.postConfigureTask;
+        if (postConfigureTask) {
             try {
-                log.debug(localize('executing.after.generate.task', 'Executing after generate task: {0}', afterGenerateTask));
+                log.debug(localize('executing.post.configure.task', 'Executing post configure task: {0}', postConfigureTask));
 
                 // Fetch all available tasks
                 const tasks = await vscode.tasks.fetchTasks();
 
                 // Find the task by label
-                const task = tasks.find(t => t.name === afterGenerateTask);
+                const task = tasks.find(t => t.name === postConfigureTask);
 
                 if (task) {
                     await vscode.tasks.executeTask(task);
                 } else {
-                    const errorMsg = localize('task.not.found', 'Task "{0}" not found. Available tasks: {1}', afterGenerateTask, tasks.map(t => t.name).join(', '));
+                    const errorMsg = localize('task.not.found', 'Task "{0}" not found. Available tasks: {1}', postConfigureTask, tasks.map(t => t.name).join(', '));
                     void vscode.window.showErrorMessage(errorMsg);
                     log.error(errorMsg);
                 }
             } catch (error: any) {
-                void vscode.window.showErrorMessage(localize('failed.to.execute.after.generate.task', 'Failed to execute after generate task: {0}', error.toString()));
-                log.error(localize('after.generate.task.error', 'Error executing after generate task'), error);
+                void vscode.window.showErrorMessage(localize('failed.to.execute.post.configure.task', 'Failed to execute post configure task: {0}', error.toString()));
+                log.error(localize('post.configure.task.error', 'Error executing post configure task'), error);
             }
         }
     }
@@ -1665,7 +1665,7 @@ export class CMakeProject {
             const result: ConfigureResult = await drv.configure(trigger, []);
             if (result.exitCode === 0) {
                 await this.refreshCompileDatabase(drv.expansionOptions);
-                await this.executeAfterGenerateTask();
+                await this.executePostConfigureTask();
             } else {
                 log.showChannel(true);
             }
@@ -1767,7 +1767,7 @@ export class CMakeProject {
                                 if (result.exitCode === 0) {
                                     await enableFullFeatureSet(true);
                                     await this.refreshCompileDatabase(drv.expansionOptions);
-                                    await this.executeAfterGenerateTask();
+                                    await this.executePostConfigureTask();
                                 } else if (result.exitCode !== 0 && (await this.getCMakeExecutable()).isDebuggerSupported && cmakeConfiguration.get(showDebuggerConfigurationString) && !forciblyCanceled && !cancelInformation.canceled && result.resultType === ConfigureResultType.NormalOperation) {
                                     log.showChannel(true);
                                     const yesButtonTitle: string = localize(

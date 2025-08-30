@@ -2663,10 +2663,10 @@
           "description": "%cmake-tools.configuration.cmake.copyCompileCommands.description%",
           "scope": "resource"
         },
-        "cmake.afterGenerateTask": {
+        "cmake.postConfigureTask": {
           "type": "string",
           "default": null,
-          "description": "%cmake-tools.configuration.cmake.afterGenerateTask.description%",
+          "description": "%cmake-tools.configuration.cmake.postConfigureTask.description%",
           "scope": "resource"
         },
         "cmake.configureOnOpen": {
