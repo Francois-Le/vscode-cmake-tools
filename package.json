@@ -1,9 +1,9 @@
 {
-  "name": "cmake-tools-with-post-configure-task",
+  "name": "cmake-tools",
   "displayName": "CMake Tools (with post configure task)",
   "description": "Fork from official cmake-tools that add a post configure task",
   "version": "1.13.0",
-  "publisher": "FrancoisLe",
+  "publisher": "ms-vscode",
   "repository": {
     "type": "git",
     "url": "https://github.com/Francois-Le/vscode-cmake-tools"
