@@ -15,7 +15,7 @@ import { Environment } from '@cmt/environmentVariables';
 
 nls.config({ messageFormat: nls.MessageFormat.bundle, bundleFormat: nls.BundleFormat.standalone })();
 const localize: nls.LocalizeFunc = nls.loadMessageBundle();
-export function defaultNumJobs(): number {
+export function defaultNumJobs (): number {
     return os.cpus().length;
 }
 
@@ -353,7 +353,7 @@ export class ConfigurationReader implements vscode.Disposable {
     get clearOutputBeforeBuild(): boolean {
         return !!this.configData.clearOutputBeforeBuild;
     }
-    get configureSettings(): { [key: string]: boolean | number | string | string[] | util.CMakeValue } {
+    get configureSettings(): {[key: string]: boolean | number | string | string[] | util.CMakeValue} {
         return this.configData.configureSettings;
     }
     get cacheInit() {
@@ -612,7 +612,7 @@ export class ConfigurationReader implements vscode.Disposable {
         cmakePath: new vscode.EventEmitter<string>(),
         buildDirectory: new vscode.EventEmitter<string>(),
         installPrefix: new vscode.EventEmitter<string | null>(),
-        sourceDirectory: new vscode.EventEmitter<string | string[]>(),
+        sourceDirectory: new vscode.EventEmitter<string|string[]>(),
         saveBeforeBuild: new vscode.EventEmitter<boolean>(),
         buildBeforeRun: new vscode.EventEmitter<boolean>(),
         clearOutputBeforeBuild: new vscode.EventEmitter<boolean>(),
@@ -646,7 +646,6 @@ export class ConfigurationReader implements vscode.Disposable {
         emscriptenSearchDirs: new vscode.EventEmitter<string[]>(),
         mergedCompileCommands: new vscode.EventEmitter<string | null>(),
         copyCompileCommands: new vscode.EventEmitter<string | null>(),
-        postConfigureTask: new vscode.EventEmitter<string | null>(),
         loadCompileCommands: new vscode.EventEmitter<boolean>(),
         configureOnOpen: new vscode.EventEmitter<boolean>(),
         configureOnEdit: new vscode.EventEmitter<boolean>(),

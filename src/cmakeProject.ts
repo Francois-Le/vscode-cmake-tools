@@ -874,7 +874,7 @@ export class CMakeProject {
      * Dispose the instance
      */
     dispose() {
-        log.debug(localize({ key: 'disposing.extension', comment: ["'CMake Tools' shouldn't be localized"] }, 'Disposing CMake Tools extension'));
+        log.debug(localize({key: 'disposing.extension', comment: ["'CMake Tools' shouldn't be localized"]}, 'Disposing CMake Tools extension'));
         this.disposeEmitter.fire();
         this.termCloseSub.dispose();
         this.launchTerminals.forEach(term => term.dispose());
@@ -1243,7 +1243,7 @@ export class CMakeProject {
      * Second phase of two-phase init. Called by `create`.
      */
     private async init(sourceDirectory: string) {
-        log.debug(localize({ key: 'second.phase.init', comment: ["'CMake Tools' shouldn't be localized'"] }, 'Starting CMake Tools second-phase init'));
+        log.debug(localize({key: 'second.phase.init', comment: ["'CMake Tools' shouldn't be localized'"]}, 'Starting CMake Tools second-phase init'));
         await this.setSourceDir(await util.normalizeAndVerifySourceDir(sourceDirectory, CMakeDriver.sourceDirExpansionOptions(this.workspaceContext.folder.uri.fsPath)));
         this.doStatusChange(this.workspaceContext.config.options);
         // Restore the debug target
@@ -2005,7 +2005,7 @@ export class CMakeProject {
         if (await this.needsReconfigure()) {
             return this.configureInternal(ConfigureTrigger.compilation, [], ConfigureType.Normal, undefined, cancellationToken);
         } else {
-            return { exitCode: 0 };
+            return {exitCode: 0};
         }
     }
 
