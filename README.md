@@ -10,8 +10,8 @@
 </div>
 
 <div align=center>
-    <img alt="VS Code Marketplace Downloads" src="https://img.shields.io/visual-studio-marketplace/d/ms-vscode.cmake-tools?style=for-the-badge&color=064f8c&cacheSeconds=3600&link=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Dms-vscode.cmake-tools">
-    <img alt="VS Code Marketplace Version" src="https://img.shields.io/visual-studio-marketplace/v/ms-vscode.cmake-tools?style=for-the-badge&color=be2128&cacheSeconds=3600&link=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%2Fms-vscode.cmake-tools%2Fchangelog">
+    <img alt="VS Code Marketplace Downloads" src="https://img.shields.io/visual-studio-marketplace/d/francoisLe.cmake-tools-with-post-configure-task?style=for-the-badge&color=064f8c&cacheSeconds=3600&link=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3DfrancoisLe.cmake-tools-with-post-configure-task">
+    <img alt="VS Code Marketplace Version" src="https://img.shields.io/visual-studio-marketplace/v/francoisLe.cmake-tools-with-post-configure-task?style=for-the-badge&color=be2128&cacheSeconds=3600&link=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%2FfrancoisLe.cmake-tools-with-post-configure-task%2Fchangelog">
     <img alt="Closed Issues" src="https://img.shields.io/github/issues-closed/microsoft/vscode-cmake-tools?style=for-the-badge&color=249847&cacheSeconds=3600&link=https%3A%2F%2Fgithub.com%2Fmicrosoft%2Fvscode-cmake-tools%2Fissues">
 </div>
 
@@ -19,7 +19,7 @@
 <img style="width: 100%" src="res/graphics/cmake-tools-banner.png" alt="CMake Tools Banner"/>
 
 ## Introduction
-[CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools) provides the native developer a full-featured, convenient, and powerful workflow for CMake-based projects in Visual Studio Code. It simplifies advanced configurations with support for CMake presets and enhances the development experience by supporting rich IntelliSense features, a built-in debugger for CMake scripts, and configurable CMake tasks. Its customizable interface allows for efficient tailored control of projects, while CTest integration ensures straightforward test execution and monitoring.
+[CMake Tools](https://marketplace.visualstudio.com/items?itemName=francoisLe.cmake-tools-with-post-configure-task) provides the native developer a full-featured, convenient, and powerful workflow for CMake-based projects in Visual Studio Code. It simplifies advanced configurations with support for CMake presets and enhances the development experience by supporting rich IntelliSense features, a built-in debugger for CMake scripts, and configurable CMake tasks. Its customizable interface allows for efficient tailored control of projects, while CTest integration ensures straightforward test execution and monitoring.
 
 <details open>
 <summary>
@@ -54,7 +54,7 @@ Ensure CMake is available on your system. A couple of options are:
 - [Download CMake](https://cmake.org/download/).
 - Utilize the CMake that is bundled with a Visual Studio installation.
 
-Install the CMake Tools extension from the Extensions pane within VS Code or from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools).
+Install the CMake Tools extension from the Extensions pane within VS Code or from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=francoisLe.cmake-tools-with-post-configure-task).
 
 Ensure that either you've added your CMake executable to your PATH, or you've adjusted the `cmake.cmakePath` setting to point to your CMake executable. 
 

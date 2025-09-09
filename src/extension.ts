@@ -15,7 +15,7 @@ import { CMakeCache } from '@cmt/cache';
 import { CMakeProject, ConfigureType, ConfigureTrigger, DiagnosticsConfiguration, DiagnosticsSettings } from '@cmt/cmakeProject';
 import { ConfigurationReader, getSettingsChangePromise, TouchBarConfig } from '@cmt/config';
 import { CppConfigurationProvider, DiagnosticsCpptools } from '@cmt/cpptools';
-import { ProjectController, AfterAcknowledgeFolderType} from '@cmt/projectController';
+import { ProjectController, AfterAcknowledgeFolderType } from '@cmt/projectController';
 
 import {
     SpecialKits,
@@ -83,8 +83,8 @@ interface Diagnostics {
 }
 
 interface ExtensionActiveCommandsInfo {
-    contextUsed: {[key: string]: any};
-    extensionActiveCommands: string [];
+    contextUsed: { [key: string]: any };
+    extensionActiveCommands: string[];
 }
 
 /**
@@ -100,9 +100,9 @@ export class ExtensionManager implements vscode.Disposable {
         this.api = new CMakeToolsApiImpl(this);
     }
 
-    private contextValues: {[key: string]: any} = {};
+    private contextValues: { [key: string]: any } = {};
     private extensionActiveCommandsInfo: ExtensionActiveCommandsInfo | null = null;
-    private localizedStrings: {[key: string]: string} = {};
+    private localizedStrings: { [key: string]: string } = {};
     private onDidChangeActiveTextEditorSub: vscode.Disposable = new DummyDisposable();
     private readonly extensionActiveCommandsEmitter = new vscode.EventEmitter<void>();
     private readonly workspaceConfig: ConfigurationReader = ConfigurationReader.create();
@@ -329,12 +329,12 @@ export class ExtensionManager implements vscode.Disposable {
         return this.extensionActiveCommandsInfo ? this.extensionActiveCommandsInfo.extensionActiveCommands : [];
     }
 
-    get extensionLocalizedStrings(): {[key: string]: string} {
+    get extensionLocalizedStrings(): { [key: string]: string } {
         return this.localizedStrings;
     }
 
     public setExtensionActiveCommands() {
-        this.extensionActiveCommandsInfo  = { contextUsed: this.contextValues ? {...this.contextValues} : {}, extensionActiveCommands: this.contextValues ? util.thisExtensionActiveCommands(this.contextValues) : [] } as ExtensionActiveCommandsInfo;
+        this.extensionActiveCommandsInfo = { contextUsed: this.contextValues ? { ...this.contextValues } : {}, extensionActiveCommands: this.contextValues ? util.thisExtensionActiveCommands(this.contextValues) : [] } as ExtensionActiveCommandsInfo;
     }
 
     public showStatusBar(fullFeatureSet: boolean) {
@@ -480,7 +480,7 @@ export class ExtensionManager implements vscode.Disposable {
         this.languageServicesDisposables.forEach(sub => sub.dispose());
     }
 
-    private getProjectsForWorkspaceFolder(folder?: vscode.WorkspaceFolder): CMakeProject[]  | undefined {
+    private getProjectsForWorkspaceFolder(folder?: vscode.WorkspaceFolder): CMakeProject[] | undefined {
         folder = this.getWorkspaceFolder(folder);
         return this.projectController.getProjectsForWorkspaceFolder(folder);
     }
@@ -1447,15 +1447,15 @@ export class ExtensionManager implements vscode.Disposable {
     }
 
     build(folder?: vscode.WorkspaceFolder, name?: string, sourceDir?: string, showCommandOnly?: boolean, isBuildCommand?: boolean) {
-        telemetry.logEvent("build", { all: "false"});
+        telemetry.logEvent("build", { all: "false" });
         return this.runCMakeCommand(async cmakeProject => {
             const targets = name ? [name] : undefined;
             return (await cmakeProject.build(targets, showCommandOnly, (isBuildCommand === undefined) ? true : isBuildCommand)).exitCode;
         },
-        folder,
-        this.ensureActiveBuildPreset,
-        true,
-        sourceDir);
+            folder,
+            this.ensureActiveBuildPreset,
+            true,
+            sourceDir);
     }
 
     showBuildCommand(folder?: vscode.WorkspaceFolder, name?: string) {
@@ -1463,13 +1463,13 @@ export class ExtensionManager implements vscode.Disposable {
     }
 
     buildAll(name?: string | string[]) {
-        telemetry.logEvent("build", { all: "true"});
+        telemetry.logEvent("build", { all: "true" });
         return this.runCMakeCommandForAll(async cmakeProject => {
             const targets = util.isArrayOfString(name) ? name : util.isString(name) ? [name] : undefined;
             return (await cmakeProject.build(targets)).exitCode;
         },
-        this.ensureActiveBuildPreset,
-        true);
+            this.ensureActiveBuildPreset,
+            true);
     }
 
     setDefaultTarget(folder?: vscode.WorkspaceFolder, name?: string, sourceDir?: string) {
@@ -1498,12 +1498,12 @@ export class ExtensionManager implements vscode.Disposable {
     }
 
     install(folder?: vscode.WorkspaceFolder) {
-        telemetry.logEvent("install", { all: "false"});
+        telemetry.logEvent("install", { all: "false" });
         return this.runCMakeCommand(cmakeProject => cmakeProject.install(), folder, undefined, true);
     }
 
     installAll() {
-        telemetry.logEvent("install", { all: "true"});
+        telemetry.logEvent("install", { all: "true" });
         return this.runCMakeCommandForAll(cmakeProject => cmakeProject.install(), undefined, true);
     }
 
@@ -1513,27 +1513,27 @@ export class ExtensionManager implements vscode.Disposable {
     }
 
     clean(folder?: vscode.WorkspaceFolder) {
-        telemetry.logEvent("clean", { all: "false"});
+        telemetry.logEvent("clean", { all: "false" });
         return this.build(folder, 'clean', undefined, undefined, false);
     }
 
     cleanAll() {
-        telemetry.logEvent("clean", { all: "true"});
+        telemetry.logEvent("clean", { all: "true" });
         return this.buildAll(['clean']);
     }
 
     cleanRebuild(folder?: vscode.WorkspaceFolder) {
-        telemetry.logEvent("cleanRebuild", { all: "false"});
+        telemetry.logEvent("cleanRebuild", { all: "false" });
         return this.runCMakeCommand(cmakeProject => cmakeProject.cleanRebuild(), folder, this.ensureActiveBuildPreset, true);
     }
 
     cleanRebuildAll() {
-        telemetry.logEvent("cleanRebuild", { all: "true"});
+        telemetry.logEvent("cleanRebuild", { all: "true" });
         return this.runCMakeCommandForAll(cmakeProject => cmakeProject.cleanRebuild(), this.ensureActiveBuildPreset, true);
     }
 
     async buildWithTarget(target?: string) {
-        telemetry.logEvent("build", { command: "buildWithTarget", all: "false"});
+        telemetry.logEvent("build", { command: "buildWithTarget", all: "false" });
         this.cleanOutputChannel();
         let activeProject: CMakeProject | undefined = this.getActiveProject();
         if (!activeProject) {
@@ -1603,32 +1603,32 @@ export class ExtensionManager implements vscode.Disposable {
     }
 
     ctest(folder?: vscode.WorkspaceFolder) {
-        telemetry.logEvent("runTests", { all: "false"});
+        telemetry.logEvent("runTests", { all: "false" });
         return this.runCMakeCommand(cmakeProject => cmakeProject.ctest(), folder, this.ensureActiveTestPreset);
     }
 
     ctestAll() {
-        telemetry.logEvent("runTests", { all: "true"});
+        telemetry.logEvent("runTests", { all: "true" });
         return this.runCMakeCommandForAll(cmakeProject => cmakeProject.ctest(), this.ensureActiveTestPreset);
     }
 
     cpack(folder?: vscode.WorkspaceFolder) {
-        telemetry.logEvent("runCPack", { all: "false"});
+        telemetry.logEvent("runCPack", { all: "false" });
         return this.runCMakeCommand(cmakeProject => cmakeProject.cpack(), folder, this.ensureActivePackagePreset);
     }
 
     cpackAll() {
-        telemetry.logEvent("runCPack", { all: "true"});
+        telemetry.logEvent("runCPack", { all: "true" });
         return this.runCMakeCommandForAll(cmakeProject => cmakeProject.cpack(), this.ensureActivePackagePreset);
     }
 
     workflow(folder?: vscode.WorkspaceFolder) {
-        telemetry.logEvent("runWorkflow", { all: "false"});
+        telemetry.logEvent("runWorkflow", { all: "false" });
         return this.runCMakeCommand(cmakeProject => cmakeProject.workflow(), folder, this.ensureActiveWorkflowPreset);
     }
 
     workflowAll() {
-        telemetry.logEvent("runWorkflow", { all: "true"});
+        telemetry.logEvent("runWorkflow", { all: "true" });
         return this.runCMakeCommandForAll(cmakeProject => cmakeProject.workflow(), this.ensureActiveWorkflowPreset);
     }
 
@@ -1657,7 +1657,7 @@ export class ExtensionManager implements vscode.Disposable {
         return this.runCMakeCommandForProject(cmakeProject => cmakeProject.quickStart(folder));
     }
 
-    resolveFolderTargetNameArgs(args?: FolderTargetNameArgsType): [ folder?: vscode.WorkspaceFolder | string, targetName?: string ] {
+    resolveFolderTargetNameArgs(args?: FolderTargetNameArgsType): [folder?: vscode.WorkspaceFolder | string, targetName?: string] {
         let folder: vscode.WorkspaceFolder | string | undefined;
         let targetName: string | undefined;
 
@@ -1672,7 +1672,7 @@ export class ExtensionManager implements vscode.Disposable {
             targetName = args.targetName;
         }
 
-        return [ folder, targetName ];
+        return [folder, targetName];
     }
 
     launchTargetPath(args?: FolderTargetNameArgsType) {
@@ -1858,7 +1858,7 @@ export class ExtensionManager implements vscode.Disposable {
     }
 
     openSettings() {
-        void vscode.commands.executeCommand('workbench.action.openSettings', '@ext:ms-vscode.cmake-tools');
+        void vscode.commands.executeCommand('workbench.action.openSettings', '@ext:francoisLe.cmake-tools-with-post-configure-task');
     }
 
     async viewLog() {
@@ -2422,7 +2422,7 @@ async function setup(context: vscode.ExtensionContext, progress?: ProgressHandle
         vscode.commands.registerCommand('cmake.outline.editCacheUI', () => runCommand('editCacheUI')),
         vscode.commands.registerCommand('cmake.outline.cleanRebuildAll', () => runCommand('cleanRebuildAll')),
         // Commands for outline items
-        vscode.commands.registerCommand('cmake.outline.configure', async (what: ProjectNode|SourceFileNode) => {
+        vscode.commands.registerCommand('cmake.outline.configure', async (what: ProjectNode | SourceFileNode) => {
             if (what instanceof ProjectNode) {
                 await runCommand('configure', what.folder, false, what.sourceDirectory);
             } else if (what instanceof SourceFileNode) {
@@ -2448,13 +2448,14 @@ async function setup(context: vscode.ExtensionContext, progress?: ProgressHandle
         vscode.commands.registerCommand('cmake.statusbar.update', () => extensionManager?.updateStatusBarForActiveProjectChange())
     ]);
 
-    return { getApi: (version: api.Version) => {
-        // Since our API is backwards compatible, we can make our version number match that which was requested.
-        if (version === api.Version.v1 || version === api.Version.v2 || version === api.Version.v3 || version === api.Version.v4) {
-            ext.api.version = version;
+    return {
+        getApi: (version: api.Version) => {
+            // Since our API is backwards compatible, we can make our version number match that which was requested.
+            if (version === api.Version.v1 || version === api.Version.v2 || version === api.Version.v3 || version === api.Version.v4) {
+                ext.api.version = version;
+            }
+            return ext.api;
         }
-        return ext.api;
-    }
     };
 }
 
@@ -2479,7 +2480,7 @@ class SchemaProvider implements vscode.TextDocumentContentProvider {
  */
 export async function activate(context: vscode.ExtensionContext): Promise<api.CMakeToolsExtensionExports> {
     // CMakeTools versions newer or equal to #1.2 should not coexist with older versions
-    // because the publisher changed (from vector-of-bool into ms-vscode),
+    // because the publisher changed (from vector-of-bool into francoisLe),
     // causing many undesired behaviors (duplicate operations, registrations for UI elements, etc...)
     const oldCMakeToolsExtension = vscode.extensions.getExtension('vector-of-bool.cmake-tools');
     if (oldCMakeToolsExtension) {
@@ -2487,26 +2488,26 @@ export async function activate(context: vscode.ExtensionContext): Promise<api.CM
     }
 
     const twxsExtension = vscode.extensions.getExtension('twxs.cmake');
-    const key = "ms-vscode.cmake-tools.twxs.cmake.showWarning";
+    const key = "francoisLe.cmake-tools-with-post-configure-task.twxs.cmake.showWarning";
     const showTwxsWarning = context.globalState.get(key, true);
     if (twxsExtension && showTwxsWarning) {
         const twxsUninstallString = localize('uninstall.twxs.uninstall', 'Uninstall twxs.cmake');
         void vscode.window.showWarningMessage(localize('uninstall.twxs.cmaketools', 'We recommend that you uninstall the twxs.cmake extension. The CMake Tools extension now provides Language Services and no longer depends on twxs.cmake.'),
             twxsUninstallString).then(async (selection) => {
-            // Uninstall twxs.cmake if the user clicked the button or cancelled
-            if (selection === twxsUninstallString || selection === undefined) {
-                if (selection === twxsUninstallString) {
-                    // Open extensions pane so user can uninstall the extension.
-                    void vscode.commands.executeCommand(
-                        "workbench.extensions.search",
-                        "twxs.cmake"
-                    );
-                }
+                // Uninstall twxs.cmake if the user clicked the button or cancelled
+                if (selection === twxsUninstallString || selection === undefined) {
+                    if (selection === twxsUninstallString) {
+                        // Open extensions pane so user can uninstall the extension.
+                        void vscode.commands.executeCommand(
+                            "workbench.extensions.search",
+                            "twxs.cmake"
+                        );
+                    }
 
-                // Don't show this warning again.
-                await context.globalState.update(key, false);
-            }
-        });
+                    // Don't show this warning again.
+                    await context.globalState.update(key, false);
+                }
+            });
     }
 
     if (vscode.workspace.getConfiguration('cmake').get('showOptionsMovedNotification')) {
@@ -2564,7 +2565,7 @@ export function getExtensionActiveCommands(): string[] {
     return extensionManager ? extensionManager.extensionActiveCommands : [];
 }
 
-export function getExtensionLocalizedStrings(): {[key: string]: string} {
+export function getExtensionLocalizedStrings(): { [key: string]: string } {
     return extensionManager ? extensionManager.extensionLocalizedStrings : {};
 }
 

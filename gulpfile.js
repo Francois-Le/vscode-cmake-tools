@@ -53,11 +53,11 @@ const languages = [
 // ****************************
 // Command: translations-export
 // The following is used to export and XLF file containing english strings for translations.
-// The result will be written to: ./vscode-extensions-localization-export/ms-vscode/
+// The result will be written to: ./vscode-extensions-localization-export/francoisLe/
 // ****************************
 
-const translationProjectName  = "vscode-extensions";
-const translationExtensionName  = "vscode-cmake-tools";
+const translationProjectName = "vscode-extensions";
+const translationExtensionName = "vscode-cmake-tools";
 
 function removePathPrefix(path, prefix) {
     if (!prefix) {
@@ -84,9 +84,9 @@ function removePathPrefix(path, prefix) {
 const traverseJson = (jsonTree, descriptionCallback, prefixPath) => {
     for (let fieldName in jsonTree) {
         if (jsonTree[fieldName] !== null) {
-            if (typeof(jsonTree[fieldName]) == "string" && fieldName === "description") {
+            if (typeof (jsonTree[fieldName]) == "string" && fieldName === "description") {
                 descriptionCallback(prefixPath, jsonTree[fieldName], jsonTree);
-            } else if (typeof(jsonTree[fieldName]) == "object") {
+            } else if (typeof (jsonTree[fieldName]) == "object") {
                 let path = prefixPath;
                 if (path !== "")
                     path = path + ".";
@@ -151,25 +151,25 @@ gulp.task("translations-export", (done) => {
     // Merge files from all source streams
     es.merge(jsStream, jsonSchemaStream, jsonLanguageServicesStream)
 
-    // Filter down to only the files we need
-    .pipe(filter(['**/*.nls.json', '**/*.nls.metadata.json']))
+        // Filter down to only the files we need
+        .pipe(filter(['**/*.nls.json', '**/*.nls.metadata.json']))
 
-    // Consoldate them into nls.metadata.json, which the xlf is built from.
-    .pipe(nls.bundleMetaDataFiles('ms-vscode.cmake-tools', '.'))
+        // Consoldate them into nls.metadata.json, which the xlf is built from.
+        .pipe(nls.bundleMetaDataFiles('francoisLe.cmake-tools-with-post-configure-task', '.'))
 
-    // filter down to just the resulting metadata files
-    .pipe(filter(['**/nls.metadata.header.json', '**/nls.metadata.json']))
+        // filter down to just the resulting metadata files
+        .pipe(filter(['**/nls.metadata.header.json', '**/nls.metadata.json']))
 
-    // Add package.nls.json, used to localized package.json
-    .pipe(gulp.src(["package.nls.json"]))
+        // Add package.nls.json, used to localized package.json
+        .pipe(gulp.src(["package.nls.json"]))
 
-    // package.nls.json and nls.metadata.json are used to generate the xlf file
-    // Does not re-queue any files to the stream.  Outputs only the XLF file
-    .pipe(nls.createXlfFiles(translationProjectName, translationExtensionName))
-    .pipe(gulp.dest(path.join(`${translationProjectName}-localization-export`)))
-    .pipe(es.wait(() => {
-        done();
-    }));
+        // package.nls.json and nls.metadata.json are used to generate the xlf file
+        // Does not re-queue any files to the stream.  Outputs only the XLF file
+        .pipe(nls.createXlfFiles(translationProjectName, translationExtensionName))
+        .pipe(gulp.dest(path.join(`${translationProjectName}-localization-export`)))
+        .pipe(es.wait(() => {
+            done();
+        }));
 });
 
 
@@ -193,9 +193,9 @@ gulp.task("translations-import", (done) => {
             .pipe(nls.prepareJsonFiles())
             .pipe(gulp.dest(path.join("./i18n", language.folderName)));
     }))
-    .pipe(es.wait(() => {
-        done();
-    }));
+        .pipe(es.wait(() => {
+            done();
+        }));
 });
 
 
@@ -221,7 +221,7 @@ const generatedSrcLocBundle = () => {
         .pipe(tsProject()).js
         .pipe(nls.createMetaDataFiles())
         .pipe(nls.createAdditionalLanguageFiles(languages, "i18n"))
-        .pipe(nls.bundleMetaDataFiles('ms-vscode.cmake-tools', 'dist'))
+        .pipe(nls.bundleMetaDataFiles('francoisLe.cmake-tools-with-post-configure-task', 'dist'))
         .pipe(nls.bundleLanguageFiles())
         .pipe(filter(['**/nls.bundle.*.json', '**/nls.metadata.header.json', '**/nls.metadata.json']))
         .pipe(gulp.dest('dist'));
@@ -284,41 +284,41 @@ const allTypeScript = [
 
 // Prints file path and line number in the same line. Easier to ctrl + left click in VS Code.
 const lintReporter = results => {
-  const messages = [];
-  let errorCount = 0;
-  let warningCount = 0;
-  let fixableErrorCount = 0;
-  let fixableWarningCount = 0;
+    const messages = [];
+    let errorCount = 0;
+    let warningCount = 0;
+    let fixableErrorCount = 0;
+    let fixableWarningCount = 0;
 
-  results.forEach(result => {
-    if (result.errorCount || result.warningCount) {
-        const filePath = result.filePath.replace(/\\/g, '/');
-        errorCount += result.errorCount;
-        warningCount += result.warningCount;
-        fixableErrorCount += result.fixableErrorCount;
-        fixableWarningCount += result.fixableWarningCount;
+    results.forEach(result => {
+        if (result.errorCount || result.warningCount) {
+            const filePath = result.filePath.replace(/\\/g, '/');
+            errorCount += result.errorCount;
+            warningCount += result.warningCount;
+            fixableErrorCount += result.fixableErrorCount;
+            fixableWarningCount += result.fixableWarningCount;
 
-        result.messages.forEach(message => {
-            messages.push(`[lint] ${filePath}:${message.line}:${message.column}: ${message.message} [${message.ruleId}]`);
-        });
+            result.messages.forEach(message => {
+                messages.push(`[lint] ${filePath}:${message.line}:${message.column}: ${message.message} [${message.ruleId}]`);
+            });
 
-        messages.push('');
+            messages.push('');
+        }
+    });
+
+    if (errorCount || warningCount) {
+        messages.push('\x1b[31m' + `  ${errorCount + warningCount} Problems (${errorCount} Errors, ${warningCount} Warnings)` + '\x1b[39m');
+        messages.push('\x1b[31m' + `  ${fixableErrorCount} Errors, ${fixableWarningCount} Warnings potentially fixable with \`--fix\` option.` + '\x1b[39m');
+        messages.push('', '');
     }
-  });
 
-  if (errorCount || warningCount) {
-    messages.push('\x1b[31m' + `  ${errorCount + warningCount} Problems (${errorCount} Errors, ${warningCount} Warnings)` + '\x1b[39m');
-    messages.push('\x1b[31m' + `  ${fixableErrorCount} Errors, ${fixableWarningCount} Warnings potentially fixable with \`--fix\` option.` + '\x1b[39m');
-    messages.push('', '');
-  }
-
-  return messages.join('\n');
+    return messages.join('\n');
 };
 
 gulp.task('lint', function () {
     // Un-comment these parts for applying auto-fix.
     return gulp.src(allTypeScript)
-        .pipe(eslint({ configFile: ".eslintrc.js" /*, fix: true */}))
+        .pipe(eslint({ configFile: ".eslintrc.js" /*, fix: true */ }))
         .pipe(eslint.format(lintReporter, process.stderr))
         //.pipe(gulp.dest(file => file.base))
         .pipe(eslint.failAfterError());

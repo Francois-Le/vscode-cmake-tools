@@ -853,7 +853,7 @@ dcourtois, tsing80, andy-held, notskm, thezogoth, yokuyuki, dbird137, fabianogk,
 for all of your hard work getting this extension to where it is today!
 
 Breaking changes:
-- The publisher id changes to ms-vscode.cmake-tools. This requires that you uninstall earlier versions of the extension.
+- The publisher id changes to francoisLe.cmake-tools-with-post-configure-task. This requires that you uninstall earlier versions of the extension.
 - Scanning for kits is able to detect more accurately multiple VS installations.
   To achieve this, a Visual Studio kit is defined differently now in cmake-tools-kits.json:
   the "visualStudio" field represents an ID unique to the installation

@@ -319,7 +319,7 @@ export class CppConfigurationProvider implements cpptools.CustomConfigurationPro
     /** Our name visible to cpptools */
     readonly name = 'CMake Tools';
     /** Our extension ID, visible to cpptools */
-    readonly extensionId = 'ms-vscode.cmake-tools';
+    readonly extensionId = 'francoisLe.cmake-tools-with-post-configure-task';
     /**
      * This value determines if we need to show the user an error message about missing compilers. When an update succeeds
      * without missing any compilers, we set this to `true`, otherwise `false`.
@@ -432,8 +432,8 @@ export class CppConfigurationProvider implements cpptools.CustomConfigurationPro
         let compilerToolchains: CodeModelToolchain | undefined;
         if ("toolchains" in opts.codeModelContent) {
             compilerToolchains = opts.codeModelContent.toolchains?.get(lang ?? "")
-            || opts.codeModelContent.toolchains?.get('CXX')
-            || opts.codeModelContent.toolchains?.get('C');
+                || opts.codeModelContent.toolchains?.get('CXX')
+                || opts.codeModelContent.toolchains?.get('C');
         }
         // If none of those work, fall back to the same order, but in the cache.
         const compilerCache = opts.cache.get(`CMAKE_${lang}_COMPILER`)

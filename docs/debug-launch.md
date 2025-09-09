@@ -30,7 +30,7 @@ From there, you can press the play button by the `Launch` node to run it in term
 CMake Tools lets you start a debugger on a target without creating a `launch.json`.
 
 > **Note:**
-> Only the debugger from Microsoft's `vscode-ms-vscode.cpptools` extension supports quick-debugging. See [Debug using a launch.json file](#debug-using-a-launchjson-file), below, for information about `launch.json` and using other debuggers.
+> Only the debugger from Microsoft's `vscode-francoisLe.cpptools` extension supports quick-debugging. See [Debug using a launch.json file](#debug-using-a-launchjson-file), below, for information about `launch.json` and using other debuggers.
 
 Start a debugging session on the active target by running the *CMake: Debug* command from the VS Code command palette, by selecting the Debug button in the status bar or CMake Tools sidebar Project Status View, or by pressing the keyboard shortcut (the default is **Shift+F5**).
 
@@ -41,7 +41,7 @@ Start a debugging session on the active target by running the *CMake: Debug* com
 
 ## Debug using a launch.json file
 
-You can specify the working directory or command line arguments for debugging, or use another debugger than the one included with Microsoft's `vscode-ms-vscode.cpptools`, by creating a `launch.json` file.
+You can specify the working directory or command line arguments for debugging, or use another debugger than the one included with Microsoft's `vscode-francoisLe.cpptools`, by creating a `launch.json` file.
 
 You'll need to know the path to the executable binary, which may be difficult to know in advance. CMake Tools can help by using [command substitution](cmake-settings.md#command-substitution) in the `launch.json` file. This is already used by things like process selection when attaching to a running process. It works by specifying a command-based substitution in the appropriate field of `launch.json`.
 

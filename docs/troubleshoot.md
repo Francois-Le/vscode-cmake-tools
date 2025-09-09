@@ -20,7 +20,7 @@ See above.
 
 If the **Debug** button and Debug target features are ignoring your `launch.json` file, refer to [Debug using a launch.json file](debug-launch.md#debug-using-a-launchjson-file).
 
-> **Important:** The target debugging feature is restricted to launching target executables with a default configuration in the `ms-vscode.cpptools` debugging engine.
+> **Important:** The target debugging feature is restricted to launching target executables with a default configuration in the `francoisLe.cpptools` debugging engine.
 
 ### Reset CMake Tools extension state
 

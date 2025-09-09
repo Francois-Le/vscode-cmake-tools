@@ -28,9 +28,9 @@ See [Debug using a launch.json file](debug-launch.md#debug-using-a-launchjson-fi
 
 ## Set up include paths for C++ IntelliSense
 
-CMake Tools currently supports Microsoft's ms-vscode.cpptools extension. If the ms-vscode.cpptools extension is installed and enabled, then configuring your project will provide this integration automatically.
+CMake Tools currently supports Microsoft's francoisLe.cpptools extension. If the francoisLe.cpptools extension is installed and enabled, then configuring your project will provide this integration automatically.
 
-ms-vscode.cpptools will show a prompt confirming that you wish to use CMake Tools to provide the configuration information for your project. Accept this prompt to activate the integration. Subsequently, CMake Tools will provide and automatically update cpptools configuration information for each source file in your project.
+francoisLe.cpptools will show a prompt confirming that you wish to use CMake Tools to provide the configuration information for your project. Accept this prompt to activate the integration. Subsequently, CMake Tools will provide and automatically update cpptools configuration information for each source file in your project.
 
 ## Next steps
 

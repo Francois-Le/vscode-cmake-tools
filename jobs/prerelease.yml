@@ -98,7 +98,7 @@ extends:
               $headers = @{
               "Accept" = "application/json; api-version=3.0-preview"
               }
-              $data = '{"filters": [{"criteria": [{"filterType": 7, "value": "ms-vscode.cmake-tools"}]}], "flags": 529}'
+              $data = '{"filters": [{"criteria": [{"filterType": 7, "value": "francoisLe.cmake-tools-with-post-configure-task"}]}], "flags": 529}'
               $response = Invoke-WebRequest -Method 'POST' -Uri $uri -UseBasicParsing -ContentType $contentType -Headers $headers -Body $data
               $newVersion = ''
               if ($response.StatusCode.Equals(200)) {

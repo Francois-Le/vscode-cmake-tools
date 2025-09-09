@@ -21,9 +21,9 @@ const parser = new contex.Parser({ regexParsingWithErrorRecovery: false });
 
 class Context implements contex.IContext {
 
-    protected _value: {[key: string]: any};
+    protected _value: { [key: string]: any };
 
-    constructor(dictionary: {[key: string]: any}) {
+    constructor(dictionary: { [key: string]: any }) {
         this._value = dictionary;
     }
     public getValue<T>(key: string): T | undefined {
@@ -573,7 +573,7 @@ export function parseCompileDefinition(str: string): [string, string | null] {
  * @throws An error if the extension is not found.
  */
 export function thisExtension() {
-    const extension = vscode.extensions.getExtension('ms-vscode.cmake-tools');
+    const extension = vscode.extensions.getExtension('francoisLe.cmake-tools-with-post-configure-task');
     if (!extension) {
         throw new Error(localize('extension.is.undefined', 'Extension is undefined!'));
     }
@@ -605,7 +605,7 @@ export function thisExtensionPackage(): PackageJSON {
  * it falls back to the default package.nls.json file.
  * @returns A promise that resolves to an object containing the localized strings.
  */
-export async function getExtensionLocalizedPackageJson(): Promise<{[key: string]: any}> {
+export async function getExtensionLocalizedPackageJson(): Promise<{ [key: string]: any }> {
     let localizedFilePath: string = path.join(thisExtensionPath(), `package.nls.${getLocaleId()}.json`);
     const fileExists: boolean = await checkFileExists(localizedFilePath);
     if (!fileExists) {
@@ -658,7 +658,7 @@ function evaluateExpression(expression: string | null, context: contex.IContext)
  * @param context An object representing the context in which to evaluate the commands.
  * @returns An array of active command names.
  */
-export function thisExtensionActiveCommands(context: {[key: string]: any}): string [] {
+export function thisExtensionActiveCommands(context: { [key: string]: any }): string[] {
     const pkg = thisExtension().packageJSON;
     const allCommands = pkg.contributes.menus.commandPalette as CommandPalette[];
     const contextObj = new Context(context);
@@ -950,7 +950,7 @@ export function createDirIfNotExistsSync(dirPath: string | undefined): void {
     }
     if (!checkDirectoryExistsSync(dirPath)) {
         try {
-            fs.mkdirSync(dirPath, {recursive: true});
+            fs.mkdirSync(dirPath, { recursive: true });
         } catch (e) {
             console.log(e);
         }
@@ -1050,7 +1050,7 @@ export function isBoolean(x: any): x is boolean {
  */
 export function makeHashString(str: string): string {
     if (process.platform === 'win32') {
-        str = normalizePath(str, {normCase: 'always'});
+        str = normalizePath(str, { normCase: 'always' });
     }
     const crypto = require('crypto');
     const hash = crypto.createHash('sha256');

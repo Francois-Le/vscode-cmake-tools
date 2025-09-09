@@ -1,9 +1,9 @@
 {
-  "name": "cmake-tools",
-  "displayName": "CMake Tools",
+  "name": "cmake-tools-with-post-configure-task",
+  "displayName": "CMake Tools (with postConfigureTask setting)",
   "description": "Extended CMake support in Visual Studio Code",
   "version": "1.13.0",
-  "publisher": "ms-vscode",
+  "publisher": "francoisLe",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/vscode-cmake-tools"
@@ -116,29 +116,39 @@
       }
     },
     "languages": [
-        {
-            "id": "cmake",
-            "extensions": [".cmake"],
-            "filenames": ["CMakelists.txt"],
-            "aliases": ["CMake"]
-        },
-        {
-            "id": "cmake-cache",
-            "filenames": ["CMakeCache.txt"],
-            "aliases": ["CMake Cache"]
-        }
+      {
+        "id": "cmake",
+        "extensions": [
+          ".cmake"
+        ],
+        "filenames": [
+          "CMakelists.txt"
+        ],
+        "aliases": [
+          "CMake"
+        ]
+      },
+      {
+        "id": "cmake-cache",
+        "filenames": [
+          "CMakeCache.txt"
+        ],
+        "aliases": [
+          "CMake Cache"
+        ]
+      }
     ],
     "grammars": [
-        {
-            "language": "cmake",
-            "scopeName": "source.cmake",
-            "path": "./syntaxes/CMake.tmLanguage"
-        },
-        {
-            "language": "cmake-cache",
-            "scopeName": "source.cmakecache",
-            "path": "./syntaxes/CMakeCache.tmLanguage"
-        }
+      {
+        "language": "cmake",
+        "scopeName": "source.cmake",
+        "path": "./syntaxes/CMake.tmLanguage"
+      },
+      {
+        "language": "cmake-cache",
+        "scopeName": "source.cmakecache",
+        "path": "./syntaxes/CMakeCache.tmLanguage"
+      }
     ],
     "commands": [
       {
@@ -921,206 +931,210 @@
       }
     ],
     "breakpoints": [
-        {
-            "language": "cmake"
-        }
+      {
+        "language": "cmake"
+      }
     ],
     "debuggers": [
-        {
-            "type": "cmake",
-            "label": "%cmake-tools.debugger.label%",
-            "languages": [
-                "cmake"
-            ],
-            "configurationAttributes": {
-                "launch": {
-                    "properties": {
-                        "scriptPath": {
-                            "type": "string",
-                            "descripttion": "%cmake-tools.debugger.scriptPath.description%",
-                            "default": "script.cmake"
-                        },
-                        "scriptArgs": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            },
-                            "default": [],
-                            "description": "%cmake-tools.debugger.scriptArgs.description%"
-                        },
-                        "scriptEnv": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "description": "%cmake-tools.debugger.name%"
-                                    },
-                                    "value": {
-                                        "type": "string",
-                                        "description": "%cmake-tools.debugger.value%"
-                                    }
-                                }
-                            },
-                            "default": [],
-                            "description": "%cmake-tools.debugger.scriptEnv.description%"
-                        },
-                        "dapLog": {
-                            "type": "string",
-                            "description": "%cmake-tools.debugger.dapLog.description%",
-                            "default": ""
-                        },
-                        "pipeName": {
-                            "type": "string",
-                            "description": "%cmake-tools.debugger.pipeName.description%",
-                            "default": ""
-                        },
-                        "clean": {
-                            "type": "boolean",
-                            "description": "%cmake-tools.debugger.clean.description%",
-                            "default": false
-                        },
-                        "configureAll": {
-                            "type": "boolean",
-                            "description": "%cmake-tools.debugger.configureAll.description%",
-                            "default": false
-                        },
-                        "cmakeDebugType": {
-                            "type": "string",
-                            "enum": ["configure", "external", "script"],
-                            "description": "%cmake-tools.debugger.debugType.description%"
-                        }
+      {
+        "type": "cmake",
+        "label": "%cmake-tools.debugger.label%",
+        "languages": [
+          "cmake"
+        ],
+        "configurationAttributes": {
+          "launch": {
+            "properties": {
+              "scriptPath": {
+                "type": "string",
+                "descripttion": "%cmake-tools.debugger.scriptPath.description%",
+                "default": "script.cmake"
+              },
+              "scriptArgs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "default": [],
+                "description": "%cmake-tools.debugger.scriptArgs.description%"
+              },
+              "scriptEnv": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "%cmake-tools.debugger.name%"
                     },
-                    "required": [
-                        "cmakeDebugType"
-                    ],
-                    "oneOf": [
-                        {
-                            "properties": {
-                                "cmakeDebugType": {
-                                    "enum": [
-                                        "script"
-                                    ]
-                                },
-                                "scriptPath": {
-                                    "type": "string",
-                                    "description": "%cmake-tools.debugger.scriptPath.description%",
-                                    "default": ""
-                                },
-                                "scriptArgs": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "default": [],
-                                    "description": "%cmake-tools.debugger.scriptArgs.description%"
-                                },
-                                "scriptEnv": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "name": {
-                                                "type": "string",
-                                                "description": "%cmake-tools.debugger.name%"
-                                            },
-                                            "value": {
-                                                "type": "string",
-                                                "description": "%cmake-tools.debugger.value%"
-                                            }
-                                        }
-                                    },
-                                    "default": [],
-                                    "description": "%cmake-tools.debugger.scriptEnv.description%"
-                                },
-                                "dapLog": {
-                                    "type": "string",
-                                    "description": "%cmake-tools.debugger.dapLog.description%",
-                                    "default": ""
-                                }
-                            },
-                            "required": [
-                                "scriptPath"
-                            ]
-                        },
-                        {
-                            "properties": {
-                                "cmakeDebugType": {
-                                    "enum": [
-                                        "configure"
-                                    ]
-                                },
-                                "clean": {
-                                    "type": "boolean",
-                                    "description": "%cmake-tools.debugger.clean.description%",
-                                    "default": false
-                                },
-                                "configureAll": {
-                                    "type": "boolean",
-                                    "description": "%cmake-tools.debugger.configureAll.description%",
-                                    "default": false
-                                },
-                                "dapLog": {
-                                    "type": "string",
-                                    "description": "%cmake-tools.debugger.dapLog.description%",
-                                    "default": ""
-                                }
-                            }
-                        },
-                        {
-                            "properties": {
-                                "cmakeDebugType": {
-                                    "enum": [
-                                        "external"
-                                    ]
-                                }
-                            },
-                            "required": [
-                                "pipeName"
-                            ]
-                        }
-                    ]
-                }
+                    "value": {
+                      "type": "string",
+                      "description": "%cmake-tools.debugger.value%"
+                    }
+                  }
+                },
+                "default": [],
+                "description": "%cmake-tools.debugger.scriptEnv.description%"
+              },
+              "dapLog": {
+                "type": "string",
+                "description": "%cmake-tools.debugger.dapLog.description%",
+                "default": ""
+              },
+              "pipeName": {
+                "type": "string",
+                "description": "%cmake-tools.debugger.pipeName.description%",
+                "default": ""
+              },
+              "clean": {
+                "type": "boolean",
+                "description": "%cmake-tools.debugger.clean.description%",
+                "default": false
+              },
+              "configureAll": {
+                "type": "boolean",
+                "description": "%cmake-tools.debugger.configureAll.description%",
+                "default": false
+              },
+              "cmakeDebugType": {
+                "type": "string",
+                "enum": [
+                  "configure",
+                  "external",
+                  "script"
+                ],
+                "description": "%cmake-tools.debugger.debugType.description%"
+              }
             },
-            "initialConfigurations": [],
-            "configurationSnippets": [
-                {
-                    "label": "%cmake-tools.debugger.configure.snippet.label%",
-                    "description": "%cmake-tools.debugger.configure.snippet.description%",
-                    "body": {
-                        "type": "cmake",
-                        "request": "launch",
-                        "name": "%cmake-tools.debugger.configure.snippet.body.name%",
-                        "cmakeDebugType": "configure",
-                        "clean": false,
-                        "configureAll": false
-                    }
+            "required": [
+              "cmakeDebugType"
+            ],
+            "oneOf": [
+              {
+                "properties": {
+                  "cmakeDebugType": {
+                    "enum": [
+                      "script"
+                    ]
+                  },
+                  "scriptPath": {
+                    "type": "string",
+                    "description": "%cmake-tools.debugger.scriptPath.description%",
+                    "default": ""
+                  },
+                  "scriptArgs": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "default": [],
+                    "description": "%cmake-tools.debugger.scriptArgs.description%"
+                  },
+                  "scriptEnv": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "%cmake-tools.debugger.name%"
+                        },
+                        "value": {
+                          "type": "string",
+                          "description": "%cmake-tools.debugger.value%"
+                        }
+                      }
+                    },
+                    "default": [],
+                    "description": "%cmake-tools.debugger.scriptEnv.description%"
+                  },
+                  "dapLog": {
+                    "type": "string",
+                    "description": "%cmake-tools.debugger.dapLog.description%",
+                    "default": ""
+                  }
                 },
-                {
-                    "label": "%cmake-tools.debugger.script.snippet.label%",
-                    "description": "%cmake-tools.debugger.script.snippet.description%",
-                    "body": {
-                        "type": "cmake",
-                        "request": "launch",
-                        "name": "%cmake-tools.debugger.script.snippet.body.name%",
-                        "cmakeDebugType": "script",
-                        "scriptPath": "^\"\\${workspaceFolder}/<...>.cmake\""
-                    }
-                },
-                {
-                    "label": "%cmake-tools.debugger.external.snippet.label%",
-                    "description": "%cmake-tools.debugger.external.snippet.description%",
-                    "body": {
-                        "type": "cmake",
-                        "request": "launch",
-                        "name": "%cmake-tools.debugger.external.snippet.body.name%",
-                        "cmakeDebugType": "external",
-                        "pipeName": "<...>"
-                    }
+                "required": [
+                  "scriptPath"
+                ]
+              },
+              {
+                "properties": {
+                  "cmakeDebugType": {
+                    "enum": [
+                      "configure"
+                    ]
+                  },
+                  "clean": {
+                    "type": "boolean",
+                    "description": "%cmake-tools.debugger.clean.description%",
+                    "default": false
+                  },
+                  "configureAll": {
+                    "type": "boolean",
+                    "description": "%cmake-tools.debugger.configureAll.description%",
+                    "default": false
+                  },
+                  "dapLog": {
+                    "type": "string",
+                    "description": "%cmake-tools.debugger.dapLog.description%",
+                    "default": ""
+                  }
                 }
+              },
+              {
+                "properties": {
+                  "cmakeDebugType": {
+                    "enum": [
+                      "external"
+                    ]
+                  }
+                },
+                "required": [
+                  "pipeName"
+                ]
+              }
             ]
-        }
+          }
+        },
+        "initialConfigurations": [],
+        "configurationSnippets": [
+          {
+            "label": "%cmake-tools.debugger.configure.snippet.label%",
+            "description": "%cmake-tools.debugger.configure.snippet.description%",
+            "body": {
+              "type": "cmake",
+              "request": "launch",
+              "name": "%cmake-tools.debugger.configure.snippet.body.name%",
+              "cmakeDebugType": "configure",
+              "clean": false,
+              "configureAll": false
+            }
+          },
+          {
+            "label": "%cmake-tools.debugger.script.snippet.label%",
+            "description": "%cmake-tools.debugger.script.snippet.description%",
+            "body": {
+              "type": "cmake",
+              "request": "launch",
+              "name": "%cmake-tools.debugger.script.snippet.body.name%",
+              "cmakeDebugType": "script",
+              "scriptPath": "^\"\\${workspaceFolder}/<...>.cmake\""
+            }
+          },
+          {
+            "label": "%cmake-tools.debugger.external.snippet.label%",
+            "description": "%cmake-tools.debugger.external.snippet.description%",
+            "body": {
+              "type": "cmake",
+              "request": "launch",
+              "name": "%cmake-tools.debugger.external.snippet.body.name%",
+              "cmakeDebugType": "external",
+              "pipeName": "<...>"
+            }
+          }
+        ]
+      }
     ],
     "menus": {
       "commandPalette": [
@@ -2816,16 +2830,16 @@
           }
         },
         "cmake.showConfigureWithDebuggerNotification": {
-            "type": "boolean",
-            "default": true,
-            "description": "%cmake-tools.configuration.cmake.showConfigureWithDebuggerNotification%",
-            "scope": "application"
+          "type": "boolean",
+          "default": true,
+          "description": "%cmake-tools.configuration.cmake.showConfigureWithDebuggerNotification%",
+          "scope": "application"
         },
         "cmake.showNotAllDocumentsSavedQuestion": {
-            "type": "boolean",
-            "default": true,
-            "description": "%cmake-tools.configuration.cmake.showNotAllDocumentsSavedQuestion%",
-            "scope": "application"
+          "type": "boolean",
+          "default": true,
+          "description": "%cmake-tools.configuration.cmake.showNotAllDocumentsSavedQuestion%",
+          "scope": "application"
         },
         "cmake.options.statusBarVisibility": {
           "type": "string",
@@ -2842,9 +2856,18 @@
         "cmake.options.advanced": {
           "type": "object",
           "default": {
-            "build": {"statusBarVisibility": "inherit", "inheritDefault": "visible"},
-            "launch": {"statusBarVisibility": "inherit", "inheritDefault": "visible"},
-            "debug": {"statusBarVisibility": "inherit", "inheritDefault": "visible"}
+            "build": {
+              "statusBarVisibility": "inherit",
+              "inheritDefault": "visible"
+            },
+            "launch": {
+              "statusBarVisibility": "inherit",
+              "inheritDefault": "visible"
+            },
+            "debug": {
+              "statusBarVisibility": "inherit",
+              "inheritDefault": "visible"
+            }
           },
           "markdownDescription": "%cmake-tools.configuration.cmake.options.advanced.markdownDescription%",
           "properties": {
@@ -3585,15 +3608,15 @@
           "scope": "resource"
         },
         "cmake.useVsDeveloperEnvironment": {
-            "type": "string",
-            "enum": [
-                "always",
-                "never",
-                "auto"
-            ],
-            "default": "auto",
-            "description": "%cmake-tools.configuration.cmake.useVsDeveloperEnvironment.description%",
-            "scope": "resource"
+          "type": "string",
+          "enum": [
+            "always",
+            "never",
+            "auto"
+          ],
+          "default": "auto",
+          "description": "%cmake-tools.configuration.cmake.useVsDeveloperEnvironment.description%",
+          "scope": "resource"
         },
         "cmake.allowCommentsInPresetsFile": {
           "type": "boolean",
@@ -3686,10 +3709,10 @@
           "scope": "resource"
         },
         "cmake.useFolderPropertyInBuildTargetDropdown": {
-            "type": "boolean",
-            "default": false,
-            "description": "%cmake-tools.configuration.cmake.useFolderPropertyInBuildTargetDropdown.description%",
-            "scope": "resource"
+          "type": "boolean",
+          "default": false,
+          "description": "%cmake-tools.configuration.cmake.useFolderPropertyInBuildTargetDropdown.description%",
+          "scope": "resource"
         }
       }
     },

@@ -55,7 +55,7 @@ suite('Select debugger', () => {
 
         // If CppTools extension is installed, the lldb-mi installed with that extension
         // will represent the debugger fallback instead of gdb.
-        const cpptoolsExtension = vscode.extensions.getExtension('ms-vscode.cpptools');
+        const cpptoolsExtension = vscode.extensions.getExtension('francoisLe.cpptools');
         const cpptoolsDebuggerPath = cpptoolsExtension ? path.join(cpptoolsExtension.extensionPath, "debugAdapters", "lldb-mi", "bin", "lldb-mi") : undefined;
         if (cpptoolsDebuggerPath) {
             expect(config['MIMode']).to.be.eq('lldb');
